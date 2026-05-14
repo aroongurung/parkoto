@@ -1,8 +1,8 @@
 <?php
-include("../connectdb.php"); // Connect to the database
+include("../connectdb.php"); 
 
 if (isset($_GET['id'])) {
-    $car_id = $_GET['id']; // Get the car ID from the URL
+    $car_id = $_GET['id']; // Get the car ID 
 
     // Fetch current car data
     $sql = "SELECT * FROM car WHERE id = '$car_id'";
@@ -25,15 +25,6 @@ if (isset($_POST['update_car'])) {
     // Prepare update statement
     $stmt = $conn->prepare("UPDATE car SET register = ?, color = ?, model_year = ?, owner_id = ? WHERE id = ?");
     $stmt->bind_param("ssssi", $register, $color, $model_year, $owner_id, $car_id);
-
-    // Fetch the current ssn
-    $current_ssn = $person['ssn'];
-
-// Update the owner_id in the car table
-    $update_car_sql = "UPDATE car SET owner_id = ? WHERE owner_id = ?";
-    $car_stmt = $conn->prepare($update_car_sql);
-    $car_stmt->bind_param("ss", $ssn, $current_ssn);
-    $car_stmt->execute();
 
 
     if ($stmt->execute()) {

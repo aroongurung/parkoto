@@ -163,11 +163,12 @@ while ($row = mysqli_fetch_assoc($result)) {
                 <h1 class="text-2xl font-bold underline underline-offset-8 decoration-red-700">Admin Dashboard</h1>
                 <div class="flex mt-5 gap-6 items-center">
                     <img src="../assests/avatar_icon.png" alt="user_icon" class="h-14" />
-                    <h2 class="mt-2 text-lg"><!--Welcome,-->
+                    <h2 class="mt-2 text-lg">
+                        <!--Welcome-->
                         <span class="text-red-700 text-2xl">
                             <p class="text-sm text-center">Welcome</p>
                             <?php echo htmlspecialchars(ucfirst($user_name)); ?>
-                        </span><!--!-->
+                        </span>
                     </h2>
                 </div>
                 <nav class="mt-10">

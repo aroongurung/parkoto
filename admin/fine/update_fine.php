@@ -4,8 +4,8 @@ include("../../connectdb.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fine_id = $_POST['fine_id'];
-    $person_id = $_POST['person']; // Use 'person' as the key
-    $car_id = $_POST['car'];       // Use 'car' as the key
+    $person_id = $_POST['person']; 
+    $car_id = $_POST['car'];  
     $date = $_POST['date'];
     $amount = $_POST['amount'];
     $reason = $_POST['reason'];

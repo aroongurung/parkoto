@@ -1,8 +1,8 @@
 <?php
-include("../connectdb.php"); // Connect to the database
+include("../connectdb.php"); 
 
 if (isset($_GET['ssn'])) {
-    $person_id = $_GET['ssn']; // Get the person's SSN from the URL
+    $person_id = $_GET['ssn']; // person's SSN from the URL
 
     // Fetch current person data
     $sql = "SELECT * FROM person WHERE ssn = '$person_id'";

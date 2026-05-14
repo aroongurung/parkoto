@@ -3,7 +3,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start(); // Start the session only if it's not already started
 }
 
-// Include the database connection file using an absolute path
+// database connection file using an absolute path
 include($_SERVER['DOCUMENT_ROOT'] . '/parkoto/connectdb.php');
 
 // Check if the user is logged in
@@ -12,7 +12,7 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-// Assuming you have stored the user's name in the session
+// user's name in the session
 $user_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : '';
 
 // Initialize variables for search results
@@ -67,9 +67,11 @@ if (isset($_POST['search_box']) && !empty($_POST['search_box'])) {
     
     <!-- Nav Bar -->
     <nav class="flex justify-between items-center bg-zinc-950 py-[0.8rem] px-[2rem] rounded-md text-white">
-        <a href="../hero.php" class="logo"><h1 class="text-4xl font-bold tracking-[0.1rem] text-white">Par<span class="text-red-700">Koto</span></h1></a>
+        <a href="./user_home.php" class="logo">
+            <h1 class="text-4xl font-bold tracking-[0.1rem] text-[#FFFAFA]">Par<span class="text-red-700">Koto</span></h1>
+        </a>
         <div class="flex gap-16 text-2xl tracking-[0.1rem]">
-            <!--<a href="../hero.php" class=" text-red-700 hover:text-white text-3xl">Home</a> -->
+            <!--<a href="../user_home.php" class=" text-red-700 hover:text-white text-3xl">Home</a> -->
         </div>
         <form method="POST" class="flex gap-6 items-center mx-auto">
             <input type="text" name="search_box" placeholder="Search..." class="pl-4 text-zinc-950 border rounded sm">
@@ -77,14 +79,14 @@ if (isset($_POST['search_box']) && !empty($_POST['search_box'])) {
         </form>
         <div class="flex gap-6 items-center">
             <p class="text-center block pt-[0.6rem]">Welcome <?php echo htmlspecialchars(ucfirst($user_name)); ?></p>
-            <a href="logout.php" class="primary-btn hover:bg-zinc-100 hover:text-zinc-950">Log Out</a>
+            <a href="../logout.php" class="primary-btn hover:bg-zinc-100 hover:text-zinc-950">Log Out</a>
         </div>
     </nav>
-    <div class="p-2 mt-2 rounded shadow sm: w-auto">
+    <!--<div class="p-2 mt-2 rounded shadow sm: w-auto">
         <div class="marquee">
             <p class="text-zinc-950 text-xl font-semibold">New Events On the Way !!!</p>
         </div>
-    </div>
+    </div> -->
 
     <!-- Search Results -->
     <?php if ($showResults): ?>

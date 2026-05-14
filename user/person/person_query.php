@@ -64,7 +64,7 @@ foreach ($cars as $car) {
     $resultFine = $stmtFine->get_result();
 
     while ($fine = $resultFine->fetch_assoc()) {
-        $fines[$car['register']][] = $fine; // Associate fines with the respective car
+        $fines[$car['register']][] = $fine; // fines with the respective car
     }
     $stmtFine->close();
 }

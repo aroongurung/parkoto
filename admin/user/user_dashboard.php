@@ -57,11 +57,12 @@ $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 <h1 class="text-2xl font-bold underline underline-offset-8 decoration-red-700 text-center">Admin Dashboard</h1>
                 <div class="flex mt-5 items-center justify-around">
                     <img src="../../assests/avatar_icon.png" alt="user_icon" class="h-14" />
-                    <h2 class="mt-2 text-lg"><!--Welcome,-->
+                    <h2 class="mt-2 text-lg">
+                        <!--Welcome,-->
                         <span class="text-red-700 text-3xl">
                             <p class="text-sm text-center">Welcome</p>
                             <?php echo htmlspecialchars(ucfirst($user_name)); ?>
-                        </span><!--!-->
+                        </span>
                     </h2>
                 </div>
                 <nav class="mt-10">

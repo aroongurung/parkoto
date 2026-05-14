@@ -3,7 +3,7 @@ include("../connectdb.php");
 
 $cars = [];
 $persons = [];
-$searchPerformed = false; // Flag to track if search has been performed
+$searchPerformed = false; // Flag to track if search performed
 
 // Handle search submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -173,12 +173,12 @@ $conn->close();
             const personDropdown = document.getElementById('person-dropdown');
             personDropdown.innerHTML = ''; // Clear current options
 
-            // Define cars and their owners (You might want to get this dynamically from your PHP)
+            // Define cars and their owners
             const cars = <?php echo json_encode($cars); ?>;
             const selectedCarData = cars.find(car => car.register === selectedCar);
 
             if (selectedCarData) {
-                const ownerId = selectedCarData.owner_id; // Get the owner ID for the selected car
+                const ownerId = selectedCarData.owner_id; // owner ID for the selected car
 
                 // Populate the person dropdown with the owner only
                 const option = document.createElement('option');

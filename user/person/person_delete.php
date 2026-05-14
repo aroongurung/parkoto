@@ -1,5 +1,5 @@
 <?php
-include("../connectdb.php"); // Ensure this file connects to your database
+include("../connectdb.php"); 
 
 if (isset($_GET['ssn'])) {
     $person_id = $_GET['ssn'];

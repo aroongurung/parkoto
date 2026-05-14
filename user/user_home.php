@@ -102,7 +102,7 @@ session_start();
 
 <body class="mx-32 my-2">
     <?php
-    include("./user/navbar.php");
+    include("./navbar.php");
     // Assuming user role is stored in session
     $userRole = isset($_SESSION['role']) ? $_SESSION['role'] : 'default_role';
     $userName = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
@@ -211,7 +211,7 @@ session_start();
 
     </div>
 
-    <?php include("./user/footer.php"); ?>
+    <?php include("./footer.php"); ?>
 </body>
 
 </html>

@@ -1,9 +1,9 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-session_start(); // Start the session
+session_start(); // Start session
 
-include("connectdb.php"); //connects to your database
+include("connectdb.php"); //connects to database
 ?>
 
 <!DOCTYPE html>
@@ -106,7 +106,7 @@ include("connectdb.php"); //connects to your database
                     if ($row['rol'] === 'admin') {
                         header("Location: ./admin/admin_home.php");
                     } else {
-                        header("Location: hero.php");
+                        header("Location: ./user/user_home.php");
                     }
                     exit;
                 } else {

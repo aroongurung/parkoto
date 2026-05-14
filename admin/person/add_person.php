@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $user_id = $_POST['user_id'];
     $ssn = mysqli_real_escape_string($conn, $_POST['ssn']);
-    $person_name = mysqli_real_escape_string($conn, $_POST['person_name']); // Assuming this is passed from the form
+    $person_name = mysqli_real_escape_string($conn, $_POST['person_name']); 
 
     // Prepare the SQL statement
     $insert_sql = "INSERT INTO person (person_name, ssn, user_id) VALUES (?, ?, ?)";
