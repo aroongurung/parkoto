@@ -56,7 +56,7 @@ $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <div class="p-5">
                 <h1 class="text-2xl font-bold underline underline-offset-8 decoration-red-700 text-center">Admin Dashboard</h1>
                 <div class="flex mt-5 items-center justify-around">
-                    <img src="../../assests/avatar_icon.png" alt="user_icon" class="h-14" />
+                    <img src="../../assets/avatar_icon.png" alt="user_icon" class="h-14" />
                     <h2 class="mt-2 text-lg">
                         <!--Welcome,-->
                         <span class="text-red-700 text-3xl">
@@ -68,27 +68,27 @@ $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 <nav class="mt-10">
                 <ul class="text-xl font-semibold flex flex-col gap-4 justify-center">
                         <li class="flex gap-2 py-2 px-4 rounded-lg  hover:bg-red-700 ">
-                            <img src="../../assests/dashboard_icon.png" alt="dashboard_icon" class="h-8" />
+                            <img src="../../assets/dashboard_icon.png" alt="dashboard_icon" class="h-8" />
                             <a href="../admin_home.php" class="block py-2 px-4">Dashboard</a>
                         </li>
                         <li class="flex gap-2 py-2 px-4 rounded-lg  hover:bg-slate-50 hover:text-zinc-950">
-                            <img src="../../assests/group_icon.png" alt="group_icon" class="h-8" />
+                            <img src="../../assets/group_icon.png" alt="group_icon" class="h-8" />
                             <a href="../../admin/user/user_dashboard.php" class="block py-2 px-4">Users</a>
                         </li>
                         <li class="flex gap-2 py-2 px-4 hover:bg-red-700 rounded-lg">
-                            <img src="../../assests/user_icon.png" alt="user_icon" class="h-8" />
+                            <img src="../../assets/user_icon.png" alt="user_icon" class="h-8" />
                             <a href="../../admin/person/person_dashboard.php" class="block py-2 px-4 ">Person</a>
                         </li>
                         <li class="flex gap-2 py-2 px-4 hover:bg-red-700 rounded-lg">
-                            <img src="../../assests/car_icon.png" alt="car_icon" class="h-8" />
+                            <img src="../../assets/car_icon.png" alt="car_icon" class="h-8" />
                             <a href="../../admin/car/car_dashboard.php" class="block py-2 px-4 ">Car</a>
                         </li>
                         <li class="flex gap-2 py-2 px-4 hover:bg-red-700 rounded-lg">
-                            <img src="../../assests/fine_icon.png" alt="finepenalty_icon" class="h-8" />
+                            <img src="../../assets/fine_icon.png" alt="finepenalty_icon" class="h-8" />
                             <a href="../../admin/fine/fine_dashboard.php" class="block py-2 px-4 ">Fine</a>
                         </li>
                         <li class="flex gap-2 py-2 px-4 hover:bg-red-700 rounded-lg mt-16">
-                            <img src="../../assests/logout_icon.png" alt="logout_icon" class="h-8" />
+                            <img src="../../assets/logout_icon.png" alt="logout_icon" class="h-8" />
                             <a href="../../logout.php" class="block py-2 px-4 ">Logout</a>
                         </li>
                     </ul>

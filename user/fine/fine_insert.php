@@ -3,7 +3,7 @@ include("../connectdb.php");
 
 $cars = [];
 $persons = [];
-$searchPerformed = false; // Flag to track if search performed
+$searchPerformed = false; // Track if search performed
 
 // Handle search submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -168,7 +168,7 @@ $conn->close();
          }
     </style>
     <script>
-        // Function to update person dropdown based on selected car
+        // Update person dropdown based on selected car
         function updatePersonDropdown(selectedCar) {
             const personDropdown = document.getElementById('person-dropdown');
             personDropdown.innerHTML = ''; // Clear current options
@@ -191,7 +191,7 @@ $conn->close();
 </head>
 <body>
     <?php 
-    include("../assests/navbar.php");   
+    include("../assets/navbar.php");   
     ?>
     <div class="flex justify-center space-x-12 mt-2">
     <!-- Card 1 -->
@@ -273,6 +273,6 @@ $conn->close();
 
 </div>
 
-    <?php include("../assests/footer.php"); ?>
+    <?php include("../assets/footer.php"); ?>
 </body>
 </html>

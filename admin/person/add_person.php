@@ -19,11 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ssn = mysqli_real_escape_string($conn, $_POST['ssn']);
     $person_name = mysqli_real_escape_string($conn, $_POST['person_name']); 
 
-    // Prepare the SQL statement
+    // Prepare the SQL 
     $insert_sql = "INSERT INTO person (person_name, ssn, user_id) VALUES (?, ?, ?)";
     $insert_stmt = mysqli_prepare($conn, $insert_sql);
 
-    // Check if preparation was successful
+    // Check if it was successful
     if ($insert_stmt === false) {
         echo "Error preparing statement: " . mysqli_error($conn);
         exit;

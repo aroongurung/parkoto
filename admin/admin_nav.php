@@ -1,8 +1,7 @@
 <?php
-// Define the base path for includes
 define('BASE_PATH', dirname(__FILE__) . '/../');
 
-// Include the database connection
+// Database connection
 include(BASE_PATH . 'connectdb.php');
 
 $searchResults = [];
@@ -21,7 +20,7 @@ if (isset($_POST['search_box']) && !empty($_POST['search_box'])) {
     $result = mysqli_query($conn, $sql);
     if ($result) {
         $searchResults = mysqli_fetch_all($result, MYSQLI_ASSOC);
-        $showResults = true; // Set to true if results exist
+        $showResults = true; // True if results exist
     } else {
         echo "Error: " . mysqli_error($conn);
     }

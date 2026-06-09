@@ -33,7 +33,7 @@ if (isset($_POST['search_box']) && !empty($_POST['search_box'])) {
         $result = mysqli_query($conn, $sql);
         if ($result) {
             $searchResults = mysqli_fetch_all($result, MYSQLI_ASSOC);
-            $showResults = true; // Set to true if results exist
+            $showResults = true; // true if results exist
         } else {
             echo "Error: " . mysqli_error($conn);
         }

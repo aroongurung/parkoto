@@ -48,11 +48,11 @@ session_start();
                 padding: 0 0.6rem;
                 align-items: center;
                 justify-content: center;
-                display: none; /* Hide sections by default */
+                display: none;
             }
 
             .card.active {
-                display: flex; /* Show active section */
+                display: flex; 
             }
 
             label {

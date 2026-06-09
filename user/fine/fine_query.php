@@ -77,7 +77,7 @@
     
 </head>
 <body>
-    <?php include("../assests/navbar.php"); ?>
+    <?php include("../assets/navbar.php"); ?>
     <div class="fine_display">
       <h2>Fine Query Results:</h2>
       <table>
@@ -124,7 +124,7 @@ $conn->close();
       </table>
 
 
-      <?php include("../assests/footer.php"); ?>
+      <?php include("../assets/footer.php"); ?>
     </div>
 </body>
 </html>

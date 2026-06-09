@@ -1,5 +1,5 @@
 <?php
-session_start(); // Start session 
+session_start(); 
 ?>
 
 <!DOCTYPE html>
@@ -104,9 +104,9 @@ session_start(); // Start session
     <div class="message">
         <h2><?php echo $_SESSION['success_message']; ?></h2>
         <script>
-          redirectToLogin(); // Call the redirect function after displaying the message
+          redirectToLogin(); // Redirect function after displaying the message
         </script>
-        <?php unset($_SESSION['success_message']); // Clear the message after displaying ?>
+        <?php unset($_SESSION['success_message']); // Clear message after displaying ?>
     </div>
   <?php endif; ?>
 

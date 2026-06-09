@@ -162,7 +162,7 @@ while ($row = mysqli_fetch_assoc($result)) {
             <div class="p-5">
                 <h1 class="text-2xl font-bold underline underline-offset-8 decoration-red-700">Admin Dashboard</h1>
                 <div class="flex mt-5 gap-6 items-center">
-                    <img src="../assests/avatar_icon.png" alt="user_icon" class="h-14" />
+                    <img src="../assets/avatar_icon.png" alt="user_icon" class="h-14" />
                     <h2 class="mt-2 text-lg">
                         <!--Welcome-->
                         <span class="text-red-700 text-2xl">
@@ -174,23 +174,23 @@ while ($row = mysqli_fetch_assoc($result)) {
                 <nav class="mt-10">
                     <ul class="text-xl font-semibold flex flex-col gap-4 justify-center">
                         <li class="flex gap-2 py-2 px-4 hover:bg-red-700 rounded-lg">
-                            <img src="../assests/group_icon.png" alt="group_icon" class="h-8" />
+                            <img src="../assets/group_icon.png" alt="group_icon" class="h-8" />
                             <a href="../admin/user/user_dashboard.php" class="block py-2 px-4">Users</a>
                         </li>
                         <li class="flex gap-2 py-2 px-4 hover:bg-red-700 rounded-lg">
-                            <img src="../assests/user_icon.png" alt="user_icon" class="h-8" />
+                            <img src="../assets/user_icon.png" alt="user_icon" class="h-8" />
                             <a href="../admin/person/person_dashboard.php" class="block py-2 px-4 ">Person</a>
                         </li>
                         <li class="flex gap-2 py-2 px-4 hover:bg-red-700 rounded-lg">
-                            <img src="../assests/car_icon.png" alt="car_icon" class="h-8" />
+                            <img src="../assets/car_icon.png" alt="car_icon" class="h-8" />
                             <a href="../admin/car/car_dashboard.php" class="block py-2 px-4 ">Car</a>
                         </li>
                         <li class="flex gap-2 py-2 px-4 hover:bg-red-700 rounded-lg">
-                            <img src="../assests/fine_icon.png" alt="finepenalty_icon" class="h-8" />
+                            <img src="../assets/fine_icon.png" alt="finepenalty_icon" class="h-8" />
                             <a href="../admin/fine/fine_dashboard.php" class="block py-2 px-4 ">Fine</a>
                         </li>
                         <li class="flex gap-2 py-2 px-4 hover:bg-red-700 rounded-lg mt-16">
-                            <img src="../assests/logout_icon.png" alt="logout_icon" class="h-8" />
+                            <img src="../assets/logout_icon.png" alt="logout_icon" class="h-8" />
                             <a href="../logout.php" class="block py-2 px-4 ">Logout</a>
                         </li>
                     </ul>
@@ -213,7 +213,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                 <div class="bg-white p-5 rounded shadow cursor-pointer" onclick="openModal('calendarModal')">
                     <h3 class="text-2xl font-bold text-red-700">Calendar</h3>
                     <p class="mt-6">Your events and schedules here.</p>
-                    <img src="../assests/google_calender_icon.png" alt="google_calender_icon" class="h-12 mt-2" />
+                    <img src="../assets/google_calender_icon.png" alt="google_calender_icon" class="h-12 mt-2" />
                 </div>
 
                 <!-- Email Box -->
@@ -222,10 +222,10 @@ while ($row = mysqli_fetch_assoc($result)) {
                     <p class="mt-6">Check your emails.</p>
                     <div class="flex items-center gap-4 mt-2">
                         <a href="https://mail.google.com" target="_blank">
-                            <img src="../assests/gmail_logo.png" alt="Gmail" class="h-6 mr-2" />
+                            <img src="../assets/gmail_logo.png" alt="Gmail" class="h-6 mr-2" />
                         </a>
                         <a href="https://outlook.live.com" target="_blank">
-                            <img src="../assests/outlook_logo.png" alt="Outlook" class="h-6" />
+                            <img src="../assets/outlook_logo.png" alt="Outlook" class="h-6" />
                         </a>
                     </div>
                 </div>
@@ -234,7 +234,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                 <div class="bg-white p-5 rounded shadow cursor-pointer" onclick="openModal('todoModal')">
                     <h3 class="text-2xl font-bold text-red-700">To-Do List (<span class="text-zinc-950"><?php echo count($todoList); ?></span>)</h3>
                     <p class="mt-6">Manage your tasks.</p>
-                    <img src="../assests/to-do-list_icon.png" alt="todolist" class="h-12 mt-1" />
+                    <img src="../assets/to-do-list_icon.png" alt="todolist" class="h-12 mt-1" />
                 </div>
 
                 <!-- Appointment Box -->
@@ -382,7 +382,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     </div>
     <?php include("admin_footer.php"); ?>
     <script>
-        // Prepare data for Chart.js
+        // Data for Chart.js
         const graphData = <?php echo json_encode($graphData); ?>;
         const labels = Object.keys(graphData);
         const data = Object.values(graphData);
