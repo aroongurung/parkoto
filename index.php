@@ -6,41 +6,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ParKoto</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style type="text/tailwindcss">
-        @layer utilities{
-            .primary-btn{
+    <style>
+        .primary-btn {
             background-color: #181C14;
-            width: 12rem;
-            height: 5rem;
-            border-radius: 0.8rem;
+            padding: 0.65rem 2rem;
+            border-radius: 0.4rem;
             color: #FFFAFA;
-            transition: 0.3s ease-in-out;
-            font-size: 1.6rem;
-            font-weight: bold;
+            transition: all 0.25s ease-in-out;
+            font-size: 1.1rem;
+            font-weight: 600;
             text-align: center;
+            cursor: pointer;
+            border: none;
+            min-width: 140px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
         }
-        
-          .primary-btn:hover{
-            background-color: rgb(185 28 28);
-            color: #FFFAFA;
-                      
-          }
-         
-         }
+
+        .primary-btn:hover {
+            background-color: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .primary-btn:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 640px) {
+            .primary-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 1rem;
+                min-width: 120px;
+            }
+            h1 {
+                font-size: 2.2rem !important;
+                text-align: center;
+            }
+            .flex.gap-12 {
+                gap: 1.5rem;
+            }
+        }
     </style>
 </head>
 
-<body class="bg-grey-400 flex justify-center items-center">
-    <div class="flex flex-col justify-center items-center mt-[12rem] text-white">
-        <div>
-            <h1 class="text-6xl tracking-wide text-[#181C14] font-bold drop-shadow-xl">Welcome to Par<span class="text-red-700 ">Koto</span></h1>
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 flex justify-center items-center min-h-screen p-5">
+    <div class="flex flex-col justify-center items-center text-center">
+        <div class="mb-8">
+            <h1 class="text-5xl md:text-6xl tracking-tight text-[#181C14] font-bold">Welcome to Par<span class="text-red-600">Koto</span></h1>
         </div>
-        <div class="flex gap-12 mt-24">
-            <button class="primary-btn shadow-2xl shadow-slate-950" onclick="location.href='login.php'">Log In</button>
-            <button class="primary-btn shadow-2xl shadow-slate-950" onclick="location.href='signup.php'">Register<p class="text-xs">Don't have account ?</p></button>
+        <div class="flex flex-col sm:flex-row gap-5 sm:gap-8">
+            <button class="primary-btn" onclick="location.href='login.php'">Log In</button>
+            <button class="primary-btn" onclick="location.href='signup.php'">
+                Register
+                <span class="block text-xs font-normal opacity-80 mt-0.5">Don't have account?</span>
+            </button>
         </div>
     </div>
-
 </body>
 
 </html>

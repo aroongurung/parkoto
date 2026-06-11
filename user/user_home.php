@@ -116,7 +116,7 @@ session_start();
         </div>
 
         <!-- Person Section -->
-        <form action="./user/person/person_query.php" method="post" class="flex gap-[6rem]">
+        <form action="person/person_query.php" method="post" class="flex gap-[6rem]">
             <div id="person-card" class="card active">
                 <h1 class="mt-[1rem] mb-[1rem] text-5xl font-bold underline decoration-red-700">Person</h1>
                 <label for="person_name">Name</label>
@@ -131,7 +131,7 @@ session_start();
 
 
         <!-- Car Section -->
-        <form action="./user/car/car_query.php" method="post" class="flex gap-[6rem]">
+        <form action="parkoto/user/car/car_query.php" method="post" class="flex gap-[6rem]">
             <div id="car-card" class="card">
                 <h1 class="mt-[1rem] mb-[2rem] text-5xl font-bold underline decoration-red-700">Car</h1>
                 <label for="register">Register</label>

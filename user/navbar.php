@@ -4,7 +4,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 // database connection file using an absolute path
-include($_SERVER['DOCUMENT_ROOT'] . '/parkoto/connectdb.php');
+include($_SERVER['DOCUMENT_ROOT'] . '../connectdb.php');
 
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
