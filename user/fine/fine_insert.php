@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $carSearch = !empty($_POST['car']) ? $conn->real_escape_string(trim($_POST['car'])) : null;
     $personSearch = !empty($_POST['person']) ? $conn->real_escape_string(trim($_POST['person'])) : null;
 
-    // Fetch car data based on search
+    // Fetch car data on search 
     if ($carSearch) {
         $carSql = "
             SELECT car.*, person.ssn AS owner_id, person.person_name 
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Fetch person data based on search
+    // Fetch person data on search
     if ($personSearch) {
         $personSql = "
             SELECT person.*, car.register AS car_registered 
@@ -42,11 +42,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Set the search performed flag to true
+    // search to true
     $searchPerformed = true;
 }
 
-// Handle penalty fine submission
+// penalty fine submission
 if (isset($_POST['apply_penalty'])) {
     $selectedCar = $_POST['car'];
     $selectedPerson = $_POST['person'];
@@ -54,7 +54,7 @@ if (isset($_POST['apply_penalty'])) {
     $reason = $_POST['reason'];
 
     if ($fineAmount && $reason) {
-        // Use prepared statements to insert penalty fine
+        // insert penalty fine
         $stmt = $conn->prepare("INSERT INTO fine (car, person, amount, reason) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("ssis", $selectedCar, $selectedPerson, $fineAmount, $reason);
 
@@ -258,7 +258,7 @@ $conn->close();
         <label for="selected_person" class="mt-2">Select Person</label>
         <select name="person" id="person-dropdown" required class="border rounded-md p-2 mt-1 mb-4">
             <option value="">--Select Person--</option>
-            <!-- Options will be populated based on car selection -->
+            <!-- Filled based on car selection -->
         </select>
         <br>
         <label for="fine_amount" class="mt-2">Amount(€):</label>

@@ -2,9 +2,9 @@
 include("../connectdb.php"); 
 
 if (isset($_GET['ssn'])) {
-    $person_id = $_GET['ssn']; // person's SSN from the URL
+    $person_id = $_GET['ssn'];
 
-    // Fetch current person data
+    // Fetch current person
     $sql = "SELECT * FROM person WHERE ssn = '$person_id'";
     $result = $conn->query($sql);
     $person = $result->fetch_assoc();
@@ -38,7 +38,7 @@ if (isset($_POST['update_person'])) {
             $car_stmt->execute();
         }
 
-        // Prepare update statement for person
+        // Prepare update for person
         $stmt = $conn->prepare("UPDATE person SET ssn = ?, person_name = ?, person_address = ?, phone_number = ? WHERE ssn = ?");
         $stmt->bind_param("sssss", $ssn, $person_name, $person_address, $phone_number, $current_ssn);
         $stmt->execute();

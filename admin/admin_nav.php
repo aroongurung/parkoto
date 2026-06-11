@@ -5,7 +5,7 @@ define('BASE_PATH', dirname(__FILE__) . '/../');
 include(BASE_PATH . 'connectdb.php');
 
 $searchResults = [];
-$showResults = false; // Initialize a variable to control the display of results
+$showResults = false; // display results
 
 if (isset($_POST['search_box']) && !empty($_POST['search_box'])) {
     $query = mysqli_real_escape_string($conn, $_POST['search_box']);
@@ -51,7 +51,7 @@ if (isset($_POST['search_box']) && !empty($_POST['search_box'])) {
 <body>
     <!-- Nav Bar -->
     <nav class="flex justify-between items-center bg-zinc-950 py-[0.8rem] px-[2rem] rounded-md text-[#FFFAFA]">
-        <a href="../admin_home.php" class="logo">
+        <a href="../admin/admin_home.php" class="logo">
             <h1 class="text-4xl font-bold tracking-[0.1rem] text-[#FFFAFA]">Par<span class="text-red-700">Koto</span></h1>
         </a>
         <!--<div class="flex gap-16 text-2xl tracking-[0.1rem]">

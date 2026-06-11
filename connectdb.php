@@ -12,8 +12,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// echo "Connected to DB"; // Optional debug line
+// echo "Connected to DB"; // debug line
 
-// No need to close the connection here
+// No need in here
 // $conn->close();
 ?>

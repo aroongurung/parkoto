@@ -18,7 +18,7 @@
 
 <body class="bg-gray-50">
     <div class="max-w-md w-full text-center px-6">
-        <!-- Big Error Icon -->
+        <!-- Error Icon -->
         <div class="text-8xl mb-6">⚠️</div>
 
         <h1 class="text-6xl font-bold text-red-600 mb-2">Oops!</h1>

@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
 }
 
 // Get the user's name from the session
-$user_name = $_SESSION['user_name']; // Make sure to set this during login
+$user_name = $_SESSION['user_name']; // during login
 
 include("../../connectdb.php");
 
@@ -104,7 +104,7 @@ $cars = mysqli_query($conn, "SELECT register, owner_id FROM car");
                 const ownerId = selectedOption.getAttribute('data-owner');
                 document.getElementById('person').value = ownerId;
 
-                // Fetch the owner's name and display it
+                // Fetch the owner's name and display
                 fetch(`get_owner_name.php?owner_id=${ownerId}`)
                     .then(response => response.json())
                     .then(data => {

@@ -200,7 +200,7 @@ session_start();
     <div class="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50">
       <h2 class="text-sm font-semibold"><?php echo $_SESSION['success_message']; ?></h2>
       <script>
-        redirectToLogin(); // Redirect function after displaying the message
+        redirectToLogin(); // Redirects after displaying the message
       </script>
       <?php unset($_SESSION['success_message']); // Clear message after displaying 
       ?>

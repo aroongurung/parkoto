@@ -103,20 +103,20 @@ session_start();
 <body class="mx-32 my-2">
     <?php
     include("./navbar.php");
-    // Assuming user role is stored in session
+    // user role as stored in session
     $userRole = isset($_SESSION['role']) ? $_SESSION['role'] : 'default_role';
     $userName = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
     $userSSN = isset($_SESSION['ssn']) ? $_SESSION['ssn'] : '';
     ?>
 
-    <div class="flex flex-col items-center justify-center gap-2 mt-[1rem] border-1 border-neutral-300">
+    <div class="flex flex-col items-center justify-center gap-8 mt-[2rem] border-1 border-neutral-300">
         <div class="flex gap-5">
             <button class="toggle-btn" onclick="toggleSection('person')">Person</button>
             <button class="toggle-btn" onclick="toggleSection('car')">Car</button>
         </div>
 
         <!-- Person Section -->
-        <form action="person/person_query.php" method="post" class="flex gap-[6rem]">
+        <form action="./person/person_query.php" method="post" class="flex gap-[6rem]">
             <div id="person-card" class="card active">
                 <h1 class="mt-[1rem] mb-[1rem] text-5xl font-bold underline decoration-red-700">Person</h1>
                 <label for="person_name">Name</label>
@@ -131,7 +131,7 @@ session_start();
 
 
         <!-- Car Section -->
-        <form action="parkoto/user/car/car_query.php" method="post" class="flex gap-[6rem]">
+        <form action="./car/car_query.php" method="post" class="flex gap-[6rem]">
             <div id="car-card" class="card">
                 <h1 class="mt-[1rem] mb-[2rem] text-5xl font-bold underline decoration-red-700">Car</h1>
                 <label for="register">Register</label>
@@ -150,7 +150,7 @@ session_start();
             <div class="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4">
 
                 <?php
-                // Array of image URLs (you can replace these with your own image URLs)
+                // Array of image URLs
                 $images = [
                     "https://images.pexels.com/photos/919073/pexels-photo-919073.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
                     "https://images.pexels.com/photos/2526128/pexels-photo-2526128.jpeg?auto=compress&cs=tinysrgb&w=600",

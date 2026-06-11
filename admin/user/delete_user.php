@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         error_log("MySQL Error: " . mysqli_error($conn)); // Log to the server's error log
         error_log("SQL Query: " . $sql); // Log the failed SQL query
 
-        // Display the user-friendly message
+        // Display  message
         echo "<p style='color: red;'>$userFriendlyMessage</p>";
     }
 }

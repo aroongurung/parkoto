@@ -2,9 +2,9 @@
 include("../connectdb.php"); 
 
 if (isset($_GET['id'])) {
-    $car_id = $_GET['id']; // Get the car ID 
+    $car_id = $_GET['id']; 
 
-    // Fetch current car data
+    // current car
     $sql = "SELECT * FROM car WHERE id = '$car_id'";
     $result = $conn->query($sql);
     $car = $result->fetch_assoc();
@@ -22,7 +22,7 @@ if (isset($_POST['update_car'])) {
     $model_year = $_POST['model_year'];
     $owner_id = $_POST['owner_id'];
 
-    // Prepare update statement
+    // update
     $stmt = $conn->prepare("UPDATE car SET register = ?, color = ?, model_year = ?, owner_id = ? WHERE id = ?");
     $stmt->bind_param("ssssi", $register, $color, $model_year, $owner_id, $car_id);
 

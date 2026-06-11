@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $model_year = mysqli_real_escape_string($conn, $_POST['model_year']);
     $owner_id = mysqli_real_escape_string($conn, $_POST['owner_id']);
 
-    // Insert new car into the database
+    // Insert new car into the db
     $sql = "INSERT INTO car (register, color, model_year, owner_id) VALUES ('$register', '$color', '$model_year', '$owner_id')";
     
     if (mysqli_query($conn, $sql)) {

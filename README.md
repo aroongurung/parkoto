@@ -14,7 +14,6 @@
 - [System Architecture](#system-architecture)
 - [User Roles](#user-roles)
 - [File Structure & What Each File Does](#file-structure--what-each-file-does)
-- [Known Issues & Notes](#known-issues--notes)
 
 ---
 
@@ -23,7 +22,7 @@
 **ParKoto** is a parking management system that allows two types of users — **Admins** and **Regular Users** — to interact with parking-related data. The system manages:
 
 - **Users** — People who can log in (system accounts)
-- **Persons** — Real-world individuals registered in the parking database (linked to users via SSN)
+- **Persons** — Users registered in the parking database (linked to users via SSN)
 - **Cars** — Vehicles registered in the system, each linked to a person (owner)
 - **Fines** — Parking fines/penalties issued against specific cars and persons
 - **To-Do Tasks** — Admin-only internal task list
@@ -47,10 +46,19 @@
 
 ## Database Setup (XAMPP)
 
+> **Quick Start:** A pre-exported development database `parkoto.sql` is included under the `database/` folder. This file was exported directly from XAMPP phpMyAdmin and contains all tables, sample data, and pre-seeded user accounts.
+
+### Option 1: Import the Pre-Exported Database (Recommended)
+
 1. Start **XAMPP** and ensure **Apache** and **MySQL** are running.
 2. Open your browser and go to: `http://localhost/phpmyadmin`
 3. Create a new database called: `parkoto`
-4. Run the following SQL to create all required tables:
+4. Click the **Import** tab, choose the `database/parkoto.sql` file from this project folder, and click **Go**.
+5. Done — all tables, schema, and demo accounts are ready.
+
+### Option 2: Manual Setup
+
+If you prefer to set up the database manually, run the following SQL to create all required tables:
 
 ```sql
 -- Users table (system login accounts)
@@ -65,7 +73,7 @@ CREATE TABLE user (
     rol         ENUM('admin', 'user') NOT NULL DEFAULT 'user'
 );
 
--- Persons table (real-world individuals, linked to users)
+-- Persons table (linked to users)
 CREATE TABLE person (
     ssn         VARCHAR(20) PRIMARY KEY,
     user_id     INT,
@@ -112,11 +120,11 @@ CREATE TABLE appointment (
 );
 ```
 
-5. The database connection is configured in `connectdb.php`:
-   - Server: `localhost`
-   - User: `root`
-   - Password: *(empty by default in XAMPP)*
-   - Database: `parkoto`
+The database connection is configured in `connectdb.php`:
+- Server: `localhost`
+- User: `root`
+- Password: *(empty by default in XAMPP)*
+- Database: `parkoto`
 
 ---
 
@@ -124,10 +132,19 @@ CREATE TABLE appointment (
 
 1. Place the `parkoto` folder inside `C:\xampp\htdocs\`
 2. Start XAMPP → Start **Apache** and **MySQL**
-3. Set up the database as described above
+3. Set up the database as described above (import `database/parkoto.sql` or run the SQL manually)
 4. Open your browser and visit: `http://localhost/parkoto`
-5. Register an account (you can select **Admin** or **User** role during signup)
-6. Log in and you'll be redirected to the appropriate dashboard
+5. Log in using one of the demo accounts below, or register a new account (you can select **Admin** or **User** role during signup)
+6. You'll be redirected to the appropriate dashboard based on your role
+
+### Demo Credentials
+
+| Role | Username / Email | Password |
+|:---|:---|:---|
+| **Admin** | `adminone@parkoto.fi` or `admin_one` | `Admin` |
+| **User** | `sanna@parkoto.com` or `Sanna` | `Sanna` |
+
+> **Note:** These accounts are pre-seeded in the included `database/parkoto.sql` export. If you set up the database manually, you will need to insert these users yourself or register new accounts via the signup page.
 
 ---
 
@@ -205,10 +222,13 @@ parkoto/
 ├── signup.php              # Registration form (collects name, username, email, password, address, phone, role)
 ├── signup_connect.php      # Processes signup form: hashes password, inserts into user table
 ├── logout.php              # Destroys session and redirects to login.php
-├── fine.php                # (Legacy/incomplete) standalone fine entry form — not fully connected
-├── error_page.php          # Basic error display page (placeholder, unstyled)
+├── fine.php                # Fine entry form - standalone form 
+├── error_page.php          # Basic error display page
 ├── connectdb.php           # MySQL database connection using mysqli; connects to 'parkoto' DB
-├── tailwind.config.js      # EMPTY FILE — can be safely deleted (Tailwind loaded via CDN instead)
+│
+├── database/
+│   └── parkoto.sql         # Pre-exported development database from XAMPP phpMyAdmin
+│                             # Contains all tables, schema, and demo user accounts
 │
 ├── assets/                     # Static image icons
 │   ├── avatar_icon.png         # Used in admin sidebar as profile avatar
@@ -228,7 +248,7 @@ parkoto/
 │   ├── admin_home.php      # Admin dashboard: stats cards, bar chart, to-do list, appointments, calendar/email widgets
 │   ├── admin_nav.php       # Top navigation bar for admin with global search (Cars + Persons + Fines)
 │   ├── admin_footer.php    # Footer with copyright year, social media links (Twitter, YouTube, Facebook, Instagram, TikTok, LinkedIn)
-│   ├── save_appointment.php # (Stub) Appointment saving handler — logic is now in admin_home.php directly
+│   ├── save_appointment.php # Appointment saving handler
 │   │
 │   ├── user/
 │   │   ├── user_dashboard.php  # Lists all registered users; allows add/edit/delete/role change
@@ -243,7 +263,7 @@ parkoto/
 │   │   ├── edit_person.php      # Handles person edit form submission
 │   │   ├── update_person.php    # Updates person record in DB
 │   │   ├── delete_person.php    # Deletes a person by SSN
-│   │   └── search_person.php    # AJAX-ready: searches person table by name
+│   │   └── search_person.php    # searches person table by name
 │   │
 │   ├── car/
 │   │   ├── car_dashboard.php    # Lists all cars; add/edit/delete; fields: register, color, model_year, owner_id
@@ -256,14 +276,14 @@ parkoto/
 │       ├── add_fine.php         # Validates person exists, then inserts fine record using prepared statements
 │       ├── update_fine.php      # Updates an existing fine record
 │       ├── delete_fine.php      # Deletes a fine by ID
-│       ├── get_owner_name.php   # AJAX endpoint: returns person name by owner SSN (used in fine form)
-│       ├── search_cars.php      # AJAX endpoint: returns cars matching a search query (JSON)
-│       └── search_persons.php   # AJAX endpoint: returns persons matching a search query (JSON)
+│       ├── get_owner_name.php   # returns person name by owner SSN (used in fine form)
+│       ├── search_cars.php      # returns cars matching a search query
+│       └── search_persons.php   # returns persons matching a search query
 │
 └── user/
     ├── user_home.php        # User dashboard: Person & Car search forms + photo gallery (Pexels images)
     ├── navbar.php           # Top nav for users: logo, global search, welcome message, logout button
-    ├── footer.php           # User-facing footer (similar to admin footer)
+    ├── footer.php           # User-facing footer
     │
     ├── person/
     │   ├── person_query.php     # Searches person table by name + SSN; displays result with linked car info
@@ -281,23 +301,6 @@ parkoto/
         ├── fine_insert.php      # User-side fine page: search cars/persons + apply penalty fine form
         └── fine_query.php       # Displays fine records for a searched car or person
 ```
-
----
-
-## Known Issues & Notes
-
-| # | Issue | Location | Notes |
-|---|---|---|---|
-| 1 | `tailwind.config.js` is empty | Root | Safe to delete — Tailwind is loaded via CDN |
-| 2 | `fine.php` in root is incomplete | `fine.php` | Has a broken search referencing a wrong table (`'signup'`) — likely a leftover draft |
-| 3 | `assests/` folder is a typo | `/assests/` | Should be `assets/` — changing it would require updating all image references |
-| 4 | Role can be self-selected during signup | `signup.php` | Anyone can register as Admin — no invite/approval system |
-| 5 | SQL injection risk in some files | `login.php`, `admin_nav.php` | Login uses `mysqli_real_escape_string` (not prepared statements); some files still use direct string interpolation in queries |
-| 6 | `fine.php` references `$conn` without including `connectdb.php` | `fine.php` | Will cause a PHP error if visited directly |
-| 7 | `save_appointment.php` is a stub | `/admin/save_appointment.php` | Appointment logic moved into `admin_home.php` directly; this file is unused |
-| 8 | Google Calendar embed uses placeholder ID | `admin_home.php` L281 | Calendar iframe has `YOUR_CALENDAR_ID` — needs to be replaced with a real calendar ID |
-| 9 | `error_page.php` has no content | `error_page.php` | Just a skeleton HTML page, never actively linked to |
-| 10 | Photo gallery images are Pexels URLs | `user_home.php` | Hardcoded external URLs — will break if offline or URLs change |
 
 ---
 

@@ -1,6 +1,6 @@
 <?php
 session_start();
-// if the user is logged in as admin
+// is logged in as admin
 if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
     header("Location: login.php");
     exit;
@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
 // user's name from the session
 $user_name = $_SESSION['user_name']; 
 
-// Include database connection
+// database connection
 include("../../connectdb.php");
 
 // Fetch users from the database

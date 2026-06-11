@@ -1,6 +1,6 @@
 <?php
 session_start();
-include($_SERVER['DOCUMENT_ROOT'] . '/parkoto/connectdb.php');
+include($_SERVER['DOCUMENT_ROOT'] . '../connectdb.php');
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -9,9 +9,11 @@ ini_set('display_errors', 1);
 $personName = isset($_POST['person_name']) ? trim($_POST['person_name']) : '';
 $ssn = isset($_POST['ssn']) ? trim($_POST['ssn']) : '';
 
-// Debugging: Output the received values
-echo "Person Name: " . htmlspecialchars($personName) . "<br>";
-echo "SSN: " . htmlspecialchars($ssn) . "<br>";
+// Initialize defaults to avoid undefined variable warnings
+$noResult = true;
+$personData = ['person_name' => '', 'person_address' => '', 'phone_number' => ''];
+$cars = [];
+$fines = [];
 
 // Check for empty values
 if (empty($personName) || empty($ssn)) {
@@ -19,7 +21,7 @@ if (empty($personName) || empty($ssn)) {
     exit;
 }
 
-// Step 1: Fetch person details
+// Fetch person details
 $sqlPerson = "SELECT p.person_name, u.person_address, u.phone_number 
               FROM person p 
               JOIN user u ON p.user_id = u.user_id 
@@ -30,43 +32,43 @@ $stmtPerson->execute();
 $resultPerson = $stmtPerson->get_result();
 
 if ($resultPerson->num_rows === 0) {
-    echo "No person found with the provided name and SSN.";
-    exit;
-}
+    $noResult = true;
+} else {
+    $noResult = false;
+    $personData = $resultPerson->fetch_assoc();
+    $stmtPerson->close();
 
-$personData = $resultPerson->fetch_assoc();
-$stmtPerson->close();
+    // Fetch  car detail
+    $sqlCar = "SELECT c.register, c.color, c.model_year 
+               FROM car c 
+               WHERE c.owner_id = ?";
+    $stmtCar = $conn->prepare($sqlCar);
+    $stmtCar->bind_param("s", $ssn);
+    $stmtCar->execute();
+    $resultCar = $stmtCar->get_result();
 
-// Step 2: Fetch associated car details
-$sqlCar = "SELECT c.register, c.color, c.model_year 
-           FROM car c 
-           WHERE c.owner_id = ?";
-$stmtCar = $conn->prepare($sqlCar);
-$stmtCar->bind_param("s", $ssn);
-$stmtCar->execute();
-$resultCar = $stmtCar->get_result();
-
-$cars = [];
-while ($row = $resultCar->fetch_assoc()) {
-    $cars[] = $row; // Collect all cars for the person
-}
-$stmtCar->close();
-
-// Step 3: Fetch fine details for each car
-$fines = [];
-foreach ($cars as $car) {
-    $sqlFine = "SELECT f.amount, f.reason 
-                FROM fine f 
-                WHERE f.car = ?";
-    $stmtFine = $conn->prepare($sqlFine);
-    $stmtFine->bind_param("s", $car['register']);
-    $stmtFine->execute();
-    $resultFine = $stmtFine->get_result();
-
-    while ($fine = $resultFine->fetch_assoc()) {
-        $fines[$car['register']][] = $fine; // fines with the respective car
+    $cars = [];
+    while ($row = $resultCar->fetch_assoc()) {
+        $cars[] = $row;
     }
-    $stmtFine->close();
+    $stmtCar->close();
+
+    // Fetch fine details for each car
+    $fines = [];
+    foreach ($cars as $car) {
+        $sqlFine = "SELECT f.amount, f.reason 
+                    FROM fine f 
+                    WHERE f.car = ?";
+        $stmtFine = $conn->prepare($sqlFine);
+        $stmtFine->bind_param("s", $car['register']);
+        $stmtFine->execute();
+        $resultFine = $stmtFine->get_result();
+
+        while ($fine = $resultFine->fetch_assoc()) {
+            $fines[$car['register']][] = $fine;
+        }
+        $stmtFine->close();
+    }
 }
 
 $conn->close();
@@ -89,88 +91,105 @@ $conn->close();
 </head>
 <body class="mx-32 my-2">
     <?php include("../navbar.php"); ?>
-    <div class="mt-2 bg-white p-5 rounded shadow">
-        <h1 class="text-2xl font-bold text-center">Person Query Results</h1>
-        <table class="min-w-full mt-4 text-center">
-            <tr class="text-red-700 font-bold text-xl">
-                <th class="border border-zinc-950 px-4 py-2">SSN</th>
-                <th class="border border-zinc-950 px-4 py-2">Name</th>
-                <th class="border border-zinc-950 px-4 py-2">Address</th>
-                <th class="border border-zinc-950 px-4 py-2">Phone Number</th>
-                <th class="border border-zinc-950 px-4 py-2">Car Register</th>
-                <th class="border border-zinc-950 px-4 py-2">Car Color</th>
-                <th class="border border-zinc-950 px-4 py-2">Model Year</th>
-                <th class="border border-zinc-950 px-4 py-2">Fine Amount</th>
-                <th class="border border-zinc-950 px-4 py-2">Fine Reason</th>
-            </tr>
 
-            <tr>
-                <td><?php echo htmlspecialchars($ssn); ?></td>
-                <td><?php echo htmlspecialchars($personData['person_name']); ?></td>
-                <td><?php echo htmlspecialchars($personData['person_address']); ?></td>
-                <td><?php echo htmlspecialchars($personData['phone_number']); ?></td>
-                <td>
-                    <?php 
-                    if (!empty($cars)) {
-                        foreach ($cars as $car) {
-                            echo htmlspecialchars($car['register']) . "<br>";
-                        }
-                    } else {
-                        echo "No cars found";
-                    }
-                    ?>
-                </td>
-                <td>
-                    <?php 
-                    if (!empty($cars)) {
-                        foreach ($cars as $car) {
-                            echo htmlspecialchars($car['color']) . "<br>";
-                        }
-                    } else {
-                        echo "No cars found";
-                    }
-                    ?>
-                </td>
-                <td>
-                    <?php 
-                    if (!empty($cars)) {
-                        foreach ($cars as $car) {
-                            echo htmlspecialchars($car['model_year']) . "<br>";
-                        }
-                    } else {
-                        echo "No cars found";
-                    }
-                    ?>
-                </td>
-                <td>
-                    <?php 
-                    foreach ($cars as $car) {
-                        if (!empty($fines[$car['register']])) {
-                            foreach ($fines[$car['register']] as $fine) {
-                                echo htmlspecialchars($fine['amount']) . "<br>";
+    <div class="flex justify-center items-start min-h-[70vh] mt-8">
+        <div class="w-full max-w-6xl bg-white p-8 rounded shadow">
+            
+            <!-- Debug Info -->
+            <div class="text-center mb-6">
+                <p><strong>Person Name:</strong> <?php echo htmlspecialchars($personName); ?></p>
+                <p><strong>SSN:</strong> <?php echo htmlspecialchars($ssn); ?></p>
+            </div>
+
+            <?php if (isset($noResult) && $noResult): ?>
+                <div class="text-center text-red-600 text-xl font-semibold py-10">
+                    No person found with the provided name and SSN.
+                </div>
+            <?php else: ?>
+                <h1 class="text-2xl font-bold text-center mb-6">Person Query Results</h1>
+                <table class="min-w-full mt-4 text-center">
+                    <tr class="text-red-700 font-bold text-xl">
+                        <th class="border border-zinc-950 px-4 py-2">SSN</th>
+                        <th class="border border-zinc-950 px-4 py-2">Name</th>
+                        <th class="border border-zinc-950 px-4 py-2">Address</th>
+                        <th class="border border-zinc-950 px-4 py-2">Phone Number</th>
+                        <th class="border border-zinc-950 px-4 py-2">Car Register</th>
+                        <th class="border border-zinc-950 px-4 py-2">Car Color</th>
+                        <th class="border border-zinc-950 px-4 py-2">Model Year</th>
+                        <th class="border border-zinc-950 px-4 py-2">Fine Amount</th>
+                        <th class="border border-zinc-950 px-4 py-2">Fine Reason</th>
+                    </tr>
+
+                    <tr>
+                        <td><?php echo htmlspecialchars($ssn); ?></td>
+                        <td><?php echo htmlspecialchars($personData['person_name']); ?></td>
+                        <td><?php echo htmlspecialchars($personData['person_address']); ?></td>
+                        <td><?php echo htmlspecialchars($personData['phone_number']); ?></td>
+                        <td>
+                            <?php 
+                            if (!empty($cars)) {
+                                foreach ($cars as $car) {
+                                    echo htmlspecialchars($car['register']) . "<br>";
+                                }
+                            } else {
+                                echo "No cars found";
                             }
-                        } else {
-                            echo "No fines";
-                        }
-                    }
-                    ?>
-                </td>
-                <td>
-                    <?php 
-                    foreach ($cars as $car) {
-                        if (!empty($fines[$car['register']])) {
-                            foreach ($fines[$car['register']] as $fine) {
-                                echo htmlspecialchars($fine['reason']) . "<br>";
+                            ?>
+                        </td>
+                        <td>
+                            <?php 
+                            if (!empty($cars)) {
+                                foreach ($cars as $car) {
+                                    echo htmlspecialchars($car['color']) . "<br>";
+                                }
+                            } else {
+                                echo "No cars found";
                             }
-                        } else {
-                            echo "No fines";
-                        }
-                    }
-                    ?>
-                </td>
-            </tr>
-        </table>
+                            ?>
+                        </td>
+                        <td>
+                            <?php 
+                            if (!empty($cars)) {
+                                foreach ($cars as $car) {
+                                    echo htmlspecialchars($car['model_year']) . "<br>";
+                                }
+                            } else {
+                                echo "No cars found";
+                            }
+                            ?>
+                        </td>
+                        <td>
+                            <?php 
+                            foreach ($cars as $car) {
+                                if (!empty($fines[$car['register']])) {
+                                    foreach ($fines[$car['register']] as $fine) {
+                                        echo htmlspecialchars($fine['amount']) . "<br>";
+                                    }
+                                } else {
+                                    echo "No fines";
+                                }
+                            }
+                            ?>
+                        </td>
+                        <td>
+                            <?php 
+                            foreach ($cars as $car) {
+                                if (!empty($fines[$car['register']])) {
+                                    foreach ($fines[$car['register']] as $fine) {
+                                        echo htmlspecialchars($fine['reason']) . "<br>";
+                                    }
+                                } else {
+                                    echo "No fines";
+                                }
+                            }
+                            ?>
+                        </td>
+                    </tr>
+                </table>
+            <?php endif; ?>
+        </div>
     </div>
+
     <?php include("../footer.php"); ?>
 </body>
 </html>

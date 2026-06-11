@@ -1,12 +1,12 @@
 <?php
 if (session_status() == PHP_SESSION_NONE) {
-    session_start(); // Start the session only if it's not already started
+    session_start(); // session only if it's not already started
 }
 
-// database connection file using an absolute path
+// database connection
 include($_SERVER['DOCUMENT_ROOT'] . '../connectdb.php');
 
-// Check if the user is logged in
+// is user logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
@@ -17,7 +17,7 @@ $user_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : '';
 
 // Initialize variables for search results
 $searchResults = [];
-$showResults = false; // Initialize a variable to control the display of results
+$showResults = false; // display results
 
 if (isset($_POST['search_box']) && !empty($_POST['search_box'])) {
     if (isset($conn)) {
@@ -56,10 +56,44 @@ if (isset($_POST['search_box']) && !empty($_POST['search_box'])) {
             box-sizing: border-box;
             animation: scroll 20s linear infinite;
         }
+         .primary-btn {
+                background-color: #c53030;
+                width: 6rem;
+                height: 2rem;
+                border-radius: 0.4rem;
+                color: #FFFAFA;
+                transition: 0.2s ease-in;
+                font-size: 1.2rem;
+                text-align: center;
+            }
 
         @keyframes scroll {
             0% { transform: translateX(90%); }
             100% { transform: translateX(-0%); }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            .flex.gap-16 {
+                display: none; /* Hide empty menu on mobile */
+            }
+            form {
+                width: 100%;
+                justify-content: center;
+            }
+            .flex.gap-6.items-center {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            .logo h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
@@ -67,7 +101,7 @@ if (isset($_POST['search_box']) && !empty($_POST['search_box'])) {
     
     <!-- Nav Bar -->
     <nav class="flex justify-between items-center bg-zinc-950 py-[0.8rem] px-[2rem] rounded-md text-white">
-        <a href="./user_home.php" class="logo">
+        <a href="/user/user_home.php" class="logo">
             <h1 class="text-4xl font-bold tracking-[0.1rem] text-[#FFFAFA]">Par<span class="text-red-700">Koto</span></h1>
         </a>
         <div class="flex gap-16 text-2xl tracking-[0.1rem]">

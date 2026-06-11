@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $register = mysqli_real_escape_string($conn, $_POST['register']); 
 
     // Delete car from the database
-    $sql = "DELETE FROM car WHERE register='$register'"; // Use register for the WHERE clause
+    $sql = "DELETE FROM car WHERE register='$register'"; 
     
     if (mysqli_query($conn, $sql)) {
         $_SESSION['success_message'] = "Car deleted successfully!"; // success message

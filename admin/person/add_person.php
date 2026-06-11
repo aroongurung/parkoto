@@ -1,12 +1,12 @@
 <?php
 session_start();
-// Check if the user is logged in as admin
+// is loged in as admin
 if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
     header("Location: login.php");
     exit;
 }
 
-// Include database connection
+// database conn
 include("../../connectdb.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     mysqli_stmt_bind_param($insert_stmt, "ssi", $person_name, $ssn, $user_id);
 
-    // Execute the statement
+    // Execute
     if (mysqli_stmt_execute($insert_stmt)) {
         $_SESSION['success_message'] = "Person registered successfully!";
         header("Location: person_dashboard.php");

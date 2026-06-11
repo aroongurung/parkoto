@@ -10,7 +10,7 @@ if (isset($_POST['person_register'])) {
 
     // Check if all fields are filled
     if ($ssn && $person_name && $person_address && $phone_number) {
-        // Use prepared statements
+        // Prepare
         $stmt = $conn->prepare("INSERT INTO person (ssn, person_name, person_address, phone_number) VALUES (?, ?, ?, ?)");
         
         if ($stmt) {

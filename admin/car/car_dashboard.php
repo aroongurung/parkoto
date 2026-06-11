@@ -1,6 +1,6 @@
 <?php
 session_start();
-// Check if the user is logged in as admin
+// is logged in as an admin
 if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
     header("Location: login.php");
     exit;
@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
 // Get the user's name from the session & confirm it during login
 $user_name = $_SESSION['user_name']; 
 
-// Include database connection
+// database connection
 include("../../connectdb.php");
 
 // Fetch cars from the database

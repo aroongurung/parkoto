@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+include("connectdb.php");
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -118,7 +126,7 @@
 
   <!-- Fine Form Card -->
   <div class="flex items-center justify-center">
-    <form action="./fine/fine_insert.php" method="post" class="card">
+    <form action="./add_fine.php" method="post" class="card">
       <h3 class="text-3xl font-bold mb-1">Par<span class="text-red-600">Koto</span></h3>
       <h1 class="text-2xl font-semibold my-2 text-[#ECDFCC]">Fine / Penalty</h1>
       <p class="text-sm text-[#ECDFCC]/80 mb-4">Fill the details below</p>

@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user_id = $_POST['user_id'];
     $new_role = $_POST['rol'];
 
-    // Update the user role
+    // Update the userr role
     $sql = "UPDATE user SET rol = '$new_role' WHERE user_id = '$user_id'";
     
     if (mysqli_query($conn, $sql)) {

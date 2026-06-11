@@ -9,9 +9,9 @@ if (isset($_POST['car_register'])) {
     $model_year = !empty($_POST['model_year']) ? $conn->real_escape_string(trim($_POST['model_year'])) : null;
     $owner_id = !empty($_POST['owner_id']) ? $conn->real_escape_string(trim($_POST['owner_id'])) : null;
 
-    // Check if all fields are filled
+    // if all fields are filled
     if ($register && $color && $model_year && $owner_id) {
-        // Check if the owner_id exists in the person table
+        // if the owner_id exists in the person table
         $owner_check_sql = "SELECT * FROM person WHERE ssn = ?";
         $owner_stmt = $conn->prepare($owner_check_sql);
         $owner_stmt->bind_param("s", $owner_id);
@@ -45,7 +45,7 @@ if (isset($_POST['car_register'])) {
     }
     // Redirect to the same page
     header("Location: " . $_SERVER['PHP_SELF']);
-    exit; // Ensure no further code is executed
+    exit; 
 }
 
 // Display success message if it exists

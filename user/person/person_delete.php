@@ -4,14 +4,14 @@ include("../connectdb.php");
 if (isset($_GET['ssn'])) {
     $person_id = $_GET['ssn'];
 
-    // Optional: Check for related entries in the car table
+    // Check-Optional for entries in the car table
     $check_sql = "SELECT * FROM car WHERE owner_id = ?";
     $check_stmt = $conn->prepare($check_sql);
     $check_stmt->bind_param("s", $person_id);
     $check_stmt->execute();
     $check_result = $check_stmt->get_result();
 
-    // If there are related records, delete them first
+    // If any records, delete first
     if ($check_result->num_rows > 0) {
         $delete_car_sql = "DELETE FROM car WHERE owner_id = ?";
         $delete_car_stmt = $conn->prepare($delete_car_sql);

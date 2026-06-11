@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $person_id = $_POST['person_id'];
 
     // Delete person from the database
-    // Assuming person_id is linked to ssn
+    // person_id is linked to ssn
     $sql = "DELETE FROM person WHERE ssn='$person_id'"; // Use ssn as primary key
 
     if (mysqli_query($conn, $sql)) {

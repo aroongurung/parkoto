@@ -9,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $query = "INSERT INTO appointment (title, date, description) VALUES ('$title', '$date', '$description')";
     if (mysqli_query($conn, $query)) {
+        //admin_home
         header("Location: admin_home.php");
     } else {
         echo "Error: " . mysqli_error($conn);

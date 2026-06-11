@@ -1,6 +1,6 @@
 <?php
 session_start();
-// if the user is logged in as admin
+// if logged in as admin
 if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
     header("Location: login.php");
     exit;
@@ -30,7 +30,7 @@ $graphData = [
     'To-Do List' => $totalTodos,
     'Appointments' => $totalAppointments
 ];
-// For the to-do list
+// to-do list
 $todoList = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['todo'])) {
@@ -202,7 +202,7 @@ while ($row = mysqli_fetch_assoc($result)) {
             <h2 class="text-3xl font-semibold">Welcome, Admin!</h2>
             <p class="mt-4">Here you can manage all aspects of the application.</p>
 
-            <!-- Dashboard Overview -->
+            <!-- Dashboard -->
             <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <!-- Graph -->
                 <div class="bg-white p-5 rounded shadow">

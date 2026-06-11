@@ -113,7 +113,7 @@ include("connectdb.php");
         $user_name = mysqli_real_escape_string($conn, $_POST['user_name']);
         $user_password = $_POST['user_password'];
 
-        // Check if username or email exists
+        // Check username or emial exists
         $sql = "SELECT * FROM user WHERE user_name = '$user_name' OR email = '$user_name'";
         $result = mysqli_query($conn, $sql);
 
@@ -123,14 +123,14 @@ include("connectdb.php");
 
             // Verify password
             if (password_verify($user_password, $row['user_password'])) {
-              // Store user information
-              $_SESSION['user_id'] = $row['user_id']; // Updated to use 'user_id'
+              // Store user infor
+              $_SESSION['user_id'] = $row['user_id'];
               $_SESSION['user_role'] = $row['rol'];
               $_SESSION['user_name'] = $row['user_name'];
 
               // Debugging output
               // echo "Role: " . $row['rol']; 
-              //exit; // Temporarily stop script to see the output
+              //exit; //  see the output
 
               // Redirect based on role
               if ($row['rol'] === 'admin') {
